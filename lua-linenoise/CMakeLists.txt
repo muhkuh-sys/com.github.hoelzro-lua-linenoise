@@ -18,6 +18,9 @@ INCLUDE(${CMAKE_HOME_DIRECTORY}/cmake/version.cmake)
 CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/lua-linenoise.xml
                ${CMAKE_BINARY_DIR}/lua${BUILDCFG_LUA_VERSION}-lua-linenoise-${PROJECT_VERSION}.xml
                @ONLY)
+CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/lua-linenoise-examples.xml
+               ${CMAKE_BINARY_DIR}/examples/lua${BUILDCFG_LUA_VERSION}-lua-linenoise-examples.xml
+               @ONLY)
 
 
 #----------------------------------------------------------------------------

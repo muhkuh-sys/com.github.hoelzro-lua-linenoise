@@ -255,6 +255,23 @@ subprocess.check_call('%s pack' % strMake, shell=True, cwd=strCwd, env=astrEnv)
 
 # ---------------------------------------------------------------------------
 #
+# Build the LUA5.1 examples
+#
+astrCmd = [
+    strJonchki,
+    'install-dependencies',
+    '--verbose', strCfg_jonchkiVerbose,
+    '--syscfg', strCfg_jonchkiSystemConfiguration,
+    '--prjcfg', strCfg_jonchkiProjectConfiguration,
+    '--finalizer', os.path.join(strCfg_projectFolder, 'examples', 'finalizer.lua')
+]
+astrCmd.extend(astrJONCHKI_SYSTEM)
+strCwd = os.path.join(strCfg_workingFolder, 'lua5.1', 'examples')
+astrCmd.append(os.path.join(strCwd, 'lua5.1-lua-linenoise-examples.xml'))
+subprocess.check_call(' '.join(astrCmd), shell=True, cwd=strCwd, env=astrEnv)
+
+# ---------------------------------------------------------------------------
+#
 # Get the build requirements for LUA5.4.
 #
 strCwd = os.path.join(strCfg_workingFolder, 'lua5.4', 'build_requirements')
@@ -309,4 +326,21 @@ astrCmd.append(strCfg_projectFolder)
 strCwd = os.path.join(strCfg_workingFolder, 'lua5.4')
 subprocess.check_call(' '.join(astrCmd), shell=True, cwd=strCwd, env=astrEnv)
 subprocess.check_call('%s pack' % strMake, shell=True, cwd=strCwd, env=astrEnv)
+
+# ---------------------------------------------------------------------------
+#
+# Build the LUA5.4 examples
+#
+astrCmd = [
+    strJonchki,
+    'install-dependencies',
+    '--verbose', strCfg_jonchkiVerbose,
+    '--syscfg', strCfg_jonchkiSystemConfiguration,
+    '--prjcfg', strCfg_jonchkiProjectConfiguration,
+    '--finalizer', os.path.join(strCfg_projectFolder, 'examples', 'finalizer.lua')
+]
+astrCmd.extend(astrJONCHKI_SYSTEM)
+strCwd = os.path.join(strCfg_workingFolder, 'lua5.4', 'examples')
+astrCmd.append(os.path.join(strCwd, 'lua5.4-lua-linenoise-examples.xml'))
+subprocess.check_call(' '.join(astrCmd), shell=True, cwd=strCwd, env=astrEnv)
 
