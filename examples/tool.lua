@@ -663,7 +663,7 @@ function Shell:run()
     if self.strData~=nil then
       strPromptText = 'data'
     end
-    local strPrompt = strPromptText .. '> '
+    local strPrompt = colors.bright .. colors.blue .. strPromptText .. '> ' .. colors.white
 
     linenoise.setcompletion(function(tCompletions, strLine)
         self:__completer(tCompletions, strLine)
