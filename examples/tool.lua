@@ -312,7 +312,7 @@ The following example shows help about the "read" command:
 
   help read
 
-The help command has several topics:
+These topics are available:
 
 # local sizMax = 0
 # for _, tTopic in ipairs(topics) do
@@ -336,7 +336,13 @@ The help command has several topics:
     text = [[
 Getting started.
 
-TODO...
+This tool is just an example for the LUA linenoise bindings. It provides 2
+commands "read" and "write".
+
+The read command reads a file or parts of it to an internal buffer.
+Run "help read" for details.
+
+The write command writes the buffer to a file. Run "help write" for details.
     ]]
   },
 
@@ -344,7 +350,23 @@ TODO...
     topic = 'read',
     description = 'The read command.',
     text = [[
-TODO...
+The read command reads a file or parts of it into the internal buffer.
+
+There are 3 forms of the command:
+
+ read all FILENAME
+   read the complete file with the name FILENAME to the internal buffer
+   Example: read all tool.lua
+
+ read START END FILENAME
+   read the file with the name FILENAME from offset START to offset END to the
+   internal buffer
+   Example: read 250 300 tool.lua
+
+ read START + LENGTH FILENAME
+   read LENGTH bytes from the file with the name FILENAME starting at offset
+   START
+   Example: read 250 + 50 tool.lua
     ]]
   },
 
@@ -352,7 +374,11 @@ TODO...
     topic = 'write',
     description = 'The write command.',
     text = [[
-TODO...
+The write command writes the internal buffer to a file.
+
+ write FILENAME
+   Example: write buffer.txt
+
     ]]
   },
 
