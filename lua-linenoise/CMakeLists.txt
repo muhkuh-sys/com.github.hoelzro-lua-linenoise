@@ -72,26 +72,26 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 
 		# Install the DLL without execute permissions.
 		INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/linenoise.dll
-		        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/lua_plugins/)
+		        DESTINATION lua_plugins/)
 
 		CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/install_windows.lua
 		               ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
 		               @ONLY)
 
 		INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
-		        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/)
+		        DESTINATION .)
 	ELSE(${JONCHKI_PLATFORM_DIST_ID} STREQUAL "windows")
 		# Package a linux build.
 
 		INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/linenoise.so
-		        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/lua_plugins/)
+		        DESTINATION lua_plugins/)
 
 		CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/install_linux.lua
 		               ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
 		               @ONLY)
 
 		INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
-		        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/install/)
+		        DESTINATION .)
 	ENDIF(${JONCHKI_PLATFORM_DIST_ID} STREQUAL "windows")
 
 	CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/lua-linenoise.xml
@@ -106,7 +106,6 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	#
 	ADD_CUSTOM_TARGET(pack
 	                  COMMAND ${CMAKE_MAKE_PROGRAM}
-	                  COMMAND ${CMAKE_MAKE_PROGRAM} install
 	                  COMMAND ${CMAKE_MAKE_PROGRAM} test
 	                  COMMAND ${CMAKE_MAKE_PROGRAM} package
 	                  COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/generate_hash.py ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-lua-linenoise-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.xml
