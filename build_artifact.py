@@ -211,7 +211,9 @@ astrCmd = [
     'install-dependencies',
     '--verbose', strCfg_jonchkiVerbose,
     '--syscfg', strCfg_jonchkiSystemConfiguration,
-    '--prjcfg', strCfg_jonchkiProjectConfiguration
+    '--prjcfg', strCfg_jonchkiProjectConfiguration,
+    '--logfile', 'jonchki.log',
+    '--dependency-log', os.path.join(strCfg_projectFolder, 'dependency_log_lua5.1.xml')
 ]
 astrCmd.extend(astrJONCHKI_SYSTEM)
 astrCmd.append('--build-dependencies')
@@ -263,6 +265,8 @@ astrCmd = [
     '--verbose', strCfg_jonchkiVerbose,
     '--syscfg', strCfg_jonchkiSystemConfiguration,
     '--prjcfg', strCfg_jonchkiProjectConfiguration,
+    '--logfile', 'jonchki.log',
+    '--dependency-log', os.path.join(strCfg_projectFolder, 'dependency_log_lua5.1_examples.xml'),
     '--finalizer', os.path.join(strCfg_projectFolder, 'examples', 'finalizer.lua')
 ]
 astrCmd.extend(astrJONCHKI_SYSTEM)
@@ -301,7 +305,9 @@ astrCmd = [
     'install-dependencies',
     '--verbose', strCfg_jonchkiVerbose,
     '--syscfg', strCfg_jonchkiSystemConfiguration,
-    '--prjcfg', strCfg_jonchkiProjectConfiguration
+    '--prjcfg', strCfg_jonchkiProjectConfiguration,
+    '--logfile', 'jonchki.log',
+    '--dependency-log', os.path.join(strCfg_projectFolder, 'dependency_log_lua5.4.xml')
 ]
 astrCmd.extend(astrJONCHKI_SYSTEM)
 astrCmd.append('--build-dependencies')
@@ -337,6 +343,8 @@ astrCmd = [
     '--verbose', strCfg_jonchkiVerbose,
     '--syscfg', strCfg_jonchkiSystemConfiguration,
     '--prjcfg', strCfg_jonchkiProjectConfiguration,
+    '--logfile', 'jonchki.log',
+    '--dependency-log', os.path.join(strCfg_projectFolder, 'dependency_log_lua5.4_examples.xml'),
     '--finalizer', os.path.join(strCfg_projectFolder, 'examples', 'finalizer.lua')
 ]
 astrCmd.extend(astrJONCHKI_SYSTEM)
