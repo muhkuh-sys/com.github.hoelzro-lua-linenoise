@@ -77,8 +77,12 @@ if tPlatform['host_distribution_id'] == 'ubuntu':
     if tPlatform['distribution_id'] == 'ubuntu':
         # Build on linux for linux.
         # It is currently not possible to build for another version of the OS.
-        if tPlatform['distribution_version'] != tPlatform['host_distribution_version']:
-            raise Exception('The target Ubuntu version must match the build host.')
+        strOsVersion = tPlatform['distribution_version']
+        strHostOsVersion = tPlatform['host_distribution_version']
+        if strOsVersion != strHostOsVersion:
+            raise Exception(
+                'The target Ubuntu version must match the build host.'
+            )
 
         if tPlatform['cpu_architecture'] == tPlatform['host_cpu_architecture']:
             # Build for the build host.
@@ -92,23 +96,40 @@ if tPlatform['host_distribution_id'] == 'ubuntu':
             # Build on linux for raspebrry.
 
             astrCMAKE_COMPILER = [
-                '-DCMAKE_TOOLCHAIN_FILE=%s/cmake/toolchainfiles/toolchain_ubuntu_arm64.cmake' % strCfg_projectFolder
+                '-DCMAKE_TOOLCHAIN_FILE=' + os.path.join(
+                    strCfg_projectFolder,
+                    'cmake',
+                    'toolchainfiles',
+                    'toolchain_ubuntu_arm64.cmake'
+                )
             ]
             astrCMAKE_PLATFORM = [
-                '-DJONCHKI_PLATFORM_DIST_ID=%s' % tPlatform['distribution_id'],
-                '-DJONCHKI_PLATFORM_DIST_VERSION=%s' % tPlatform['distribution_version'],
-                '-DJONCHKI_PLATFORM_CPU_ARCH=%s' % tPlatform['cpu_architecture']
+                '-DJONCHKI_PLATFORM_DIST_ID=%s' %
+                tPlatform['distribution_id'],
+
+                '-DJONCHKI_PLATFORM_DIST_VERSION=%s' %
+                tPlatform['distribution_version'],
+
+                '-DJONCHKI_PLATFORM_CPU_ARCH=%s' %
+                tPlatform['cpu_architecture']
             ]
 
             astrJONCHKI_SYSTEM = [
                 '--distribution-id %s' % tPlatform['distribution_id'],
-                '--distribution-version %s' % tPlatform['distribution_version'],
-                '--cpu-architecture %s' % tPlatform['cpu_architecture']
+
+                '--distribution-version %s' %
+                tPlatform['distribution_version'],
+
+                '--cpu-architecture %s' %
+                tPlatform['cpu_architecture']
             ]
             strMake = 'make'
 
         else:
-            raise Exception('Unknown CPU architecture: "%s"' % tPlatform['cpu_architecture'])
+            raise Exception(
+                'Unknown CPU architecture: "%s"' %
+                tPlatform['cpu_architecture']
+            )
 
     elif tPlatform['distribution_id'] == 'windows':
         # Cross build on linux for windows.
@@ -116,7 +137,12 @@ if tPlatform['host_distribution_id'] == 'ubuntu':
         if tPlatform['cpu_architecture'] == 'x86':
             # Build for 32bit windows.
             astrCMAKE_COMPILER = [
-                '-DCMAKE_TOOLCHAIN_FILE=%s/cmake/toolchainfiles/toolchain_windows_32.cmake' % strCfg_projectFolder
+                '-DCMAKE_TOOLCHAIN_FILE=' + os.path.join(
+                    strCfg_projectFolder,
+                    'cmake',
+                    'toolchainfiles',
+                    'toolchain_windows_32.cmake'
+                )
             ]
             astrCMAKE_PLATFORM = [
                 '-DJONCHKI_PLATFORM_DIST_ID=windows',
@@ -133,7 +159,12 @@ if tPlatform['host_distribution_id'] == 'ubuntu':
         elif tPlatform['cpu_architecture'] == 'x86_64':
             # Build for 64bit windows.
             astrCMAKE_COMPILER = [
-                '-DCMAKE_TOOLCHAIN_FILE=%s/cmake/toolchainfiles/toolchain_windows_64.cmake' % strCfg_projectFolder
+                '-DCMAKE_TOOLCHAIN_FILE=' + os.path.join(
+                    strCfg_projectFolder,
+                    'cmake',
+                    'toolchainfiles',
+                    'toolchain_windows_64.cmake'
+                )
             ]
             astrCMAKE_PLATFORM = [
                 '-DJONCHKI_PLATFORM_DIST_ID=windows',
@@ -148,10 +179,16 @@ if tPlatform['host_distribution_id'] == 'ubuntu':
             strMake = 'make'
 
         else:
-            raise Exception('Unknown CPU architecture: "%s"' % tPlatform['cpu_architecture'])
+            raise Exception(
+                'Unknown CPU architecture: "%s"' %
+                tPlatform['cpu_architecture']
+            )
 
     else:
-        raise Exception('Unknown distribution: "%s"' % tPlatform['distribution_id'])
+        raise Exception(
+            'Unknown distribution: "%s"' %
+            tPlatform['distribution_id']
+        )
 
 else:
     raise Exception(
@@ -178,6 +215,8 @@ strJonchki = jonchkihere.install(
     strCfg_jonchkiInstallationFolder,
     LOCAL_ARCHIVES=strCfg_jonchkiLocalArchives
 )
+if strJonchki is None:
+    raise Exception('Failed to install Jonchki.')
 
 
 # ---------------------------------------------------------------------------
@@ -213,7 +252,10 @@ astrCmd = [
     '--syscfg', strCfg_jonchkiSystemConfiguration,
     '--prjcfg', strCfg_jonchkiProjectConfiguration,
     '--logfile', 'jonchki.log',
-    '--dependency-log', os.path.join(strCfg_projectFolder, 'dependency_log_lua5.1.xml')
+    '--dependency-log', os.path.join(
+        strCfg_projectFolder,
+        'dependency_log_lua5.1.xml'
+    )
 ]
 astrCmd.extend(astrJONCHKI_SYSTEM)
 astrCmd.append('--build-dependencies')
@@ -266,8 +308,15 @@ astrCmd = [
     '--syscfg', strCfg_jonchkiSystemConfiguration,
     '--prjcfg', strCfg_jonchkiProjectConfiguration,
     '--logfile', 'jonchki.log',
-    '--dependency-log', os.path.join(strCfg_projectFolder, 'dependency_log_lua5.1_examples.xml'),
-    '--finalizer', os.path.join(strCfg_projectFolder, 'examples', 'finalizer.lua')
+    '--dependency-log', os.path.join(
+        strCfg_projectFolder,
+        'dependency_log_lua5.1_examples.xml'
+    ),
+    '--finalizer', os.path.join(
+        strCfg_projectFolder,
+        'examples',
+        'finalizer.lua'
+    )
 ]
 astrCmd.extend(astrJONCHKI_SYSTEM)
 strCwd = os.path.join(strCfg_workingFolder, 'lua5.1', 'examples')
@@ -307,7 +356,10 @@ astrCmd = [
     '--syscfg', strCfg_jonchkiSystemConfiguration,
     '--prjcfg', strCfg_jonchkiProjectConfiguration,
     '--logfile', 'jonchki.log',
-    '--dependency-log', os.path.join(strCfg_projectFolder, 'dependency_log_lua5.4.xml')
+    '--dependency-log', os.path.join(
+        strCfg_projectFolder,
+        'dependency_log_lua5.4.xml'
+    )
 ]
 astrCmd.extend(astrJONCHKI_SYSTEM)
 astrCmd.append('--build-dependencies')
@@ -344,11 +396,17 @@ astrCmd = [
     '--syscfg', strCfg_jonchkiSystemConfiguration,
     '--prjcfg', strCfg_jonchkiProjectConfiguration,
     '--logfile', 'jonchki.log',
-    '--dependency-log', os.path.join(strCfg_projectFolder, 'dependency_log_lua5.4_examples.xml'),
-    '--finalizer', os.path.join(strCfg_projectFolder, 'examples', 'finalizer.lua')
+    '--dependency-log', os.path.join(
+        strCfg_projectFolder,
+        'dependency_log_lua5.4_examples.xml'
+    ),
+    '--finalizer', os.path.join(
+        strCfg_projectFolder,
+        'examples',
+        'finalizer.lua'
+    )
 ]
 astrCmd.extend(astrJONCHKI_SYSTEM)
 strCwd = os.path.join(strCfg_workingFolder, 'lua5.4', 'examples')
 astrCmd.append(os.path.join(strCwd, 'lua5.4-lua-linenoise-examples.xml'))
 subprocess.check_call(' '.join(astrCmd), shell=True, cwd=strCwd, env=astrEnv)
-

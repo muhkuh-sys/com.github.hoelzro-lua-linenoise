@@ -190,11 +190,13 @@ class PlatformDetect:
         strCpuArchitecture = None
 
         # Try to parse the output of the 'getconf LONG_BIT' command.
-        strOutput = subprocess.check_output(['getconf', 'LONG_BIT'])
-        strOutputStrip = strOutput.strip()
-        if strOutputStrip == '32':
+        strOutput = subprocess.check_output(['getconf', 'LONG_BIT']).decode(
+            "utf-8",
+            "replace"
+        ).strip()
+        if strOutput == '32':
             strCpuArchitecture = 'x86'
-        elif strOutputStrip == '64':
+        elif strOutput == '64':
             strCpuArchitecture = 'x86_64'
 
         return strCpuArchitecture
