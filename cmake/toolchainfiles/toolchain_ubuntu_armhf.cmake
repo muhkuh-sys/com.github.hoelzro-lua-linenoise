@@ -9,11 +9,11 @@ set(PRJ_DIR ${CMAKE_HOME_DIRECTORY})
 set(PKGBASE ${PRJ_DIR}/build/raspberry/packages)
 
 set(tools /usr/bin)
-set(CMAKE_C_COMPILER ${tools}/aarch64-linux-gnu-gcc)
-set(CMAKE_CXX_COMPILER ${tools}/aarch64-linux-gnu-g++)
+set(CMAKE_C_COMPILER ${tools}/arm-linux-gnueabihf-gcc)
+set(CMAKE_CXX_COMPILER ${tools}/arm-linux-gnueabihf-g++)
 
 # Source: https://stackoverflow.com/questions/11423313/cmake-cross-compiling-c-flags-from-toolchain-file-ignored
 UNSET(CMAKE_C_FLAGS CACHE)
 UNSET(CMAKE_CXX_FLAGS CACHE)
-set(CMAKE_C_FLAGS "-I${PKGBASE}/usr/include/ -L${PKGBASE}/usr/lib/aarch64-linux-gnu/ -Xlinker -rpath=${PKGBASE}/lib/aarch64-linux-gnu/" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS "-I${PKGBASE}/usr/include/ -L${PKGBASE}/usr/lib/aarch64-linux-gnu/ -Xlinker -rpath=${PKGBASE}/lib/aarch64-linux-gnu/" CACHE STRING "" FORCE)
+set(CMAKE_C_FLAGS "-I${PKGBASE}/usr/include/ -L${PKGBASE}/usr/lib/arm-linux-gnueabihf/ -Xlinker -rpath=${PKGBASE}/lib/arm-linux-gnueabihf/" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS "-I${PKGBASE}/usr/include/ -L${PKGBASE}/usr/lib/arm-linux-gnueabihf/ -Xlinker -rpath=${PKGBASE}/lib/arm-linux-gnueabihf/" CACHE STRING "" FORCE)
