@@ -34,7 +34,7 @@ strCfg_jonchkiHerePath = os.path.join(
     'jonchki'
 )
 # This is the Jonchki version to use.
-strCfg_jonchkiVersion = '0.0.6.1'
+strCfg_jonchkiVersion = '0.0.7.1'
 # Look in this folder for Jonchki archives before downloading them.
 strCfg_jonchkiLocalArchives = os.path.join(
     strCfg_projectFolder,
@@ -92,8 +92,41 @@ if tPlatform['host_distribution_id'] == 'ubuntu':
             astrJONCHKI_SYSTEM = []
             strMake = 'make'
 
+        elif tPlatform['cpu_architecture'] == 'armhf':
+            # Build on linux for raspberry.
+
+            astrCMAKE_COMPILER = [
+                '-DCMAKE_TOOLCHAIN_FILE=' + os.path.join(
+                    strCfg_projectFolder,
+                    'cmake',
+                    'toolchainfiles',
+                    'toolchain_ubuntu_armhf.cmake'
+                )
+            ]
+            astrCMAKE_PLATFORM = [
+                '-DJONCHKI_PLATFORM_DIST_ID=%s' %
+                tPlatform['distribution_id'],
+
+                '-DJONCHKI_PLATFORM_DIST_VERSION=%s' %
+                tPlatform['distribution_version'],
+
+                '-DJONCHKI_PLATFORM_CPU_ARCH=%s' %
+                tPlatform['cpu_architecture']
+            ]
+
+            astrJONCHKI_SYSTEM = [
+                '--distribution-id %s' % tPlatform['distribution_id'],
+
+                '--distribution-version %s' %
+                tPlatform['distribution_version'],
+
+                '--cpu-architecture %s' %
+                tPlatform['cpu_architecture']
+            ]
+            strMake = 'make'
+
         elif tPlatform['cpu_architecture'] == 'arm64':
-            # Build on linux for raspebrry.
+            # Build on linux for raspberry.
 
             astrCMAKE_COMPILER = [
                 '-DCMAKE_TOOLCHAIN_FILE=' + os.path.join(
