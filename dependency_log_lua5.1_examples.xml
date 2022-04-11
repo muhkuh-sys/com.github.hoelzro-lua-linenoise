@@ -2,8 +2,8 @@
 <dependency-log>
 	<dependencies>
 		<dependency group="br.puc-rio.inf.www.roberto" module="lpeg" artifact="lua5.1-lpeg" version="1.0.2.2"/>
-		<dependency group="com.github.hoelzro" module="lua-linenoise" artifact="lua5.1-lua-linenoise-examples" version="0.9.1"/>
-		<dependency group="com.github.hoelzro" module="lua-linenoise" artifact="lua5.1-lua-linenoise" version="0.9.1"/>
+		<dependency group="com.github.hoelzro" module="lua-linenoise" artifact="lua5.1-lua-linenoise-examples" version="0.9.2"/>
+		<dependency group="com.github.hoelzro" module="lua-linenoise" artifact="lua5.1-lua-linenoise" version="0.9.2"/>
 		<dependency group="com.github.hoelzro" module="lua-term" artifact="lua5.1-lua-term" version="0.7.4"/>
 		<dependency group="com.github.keplerproject" module="luafilesystem" artifact="lua5.1-luafilesystem" version="1.7.0.2.3"/>
 		<dependency group="com.github.stevedonovan" module="penlight" artifact="penlight" version="1.7.0.1"/>
