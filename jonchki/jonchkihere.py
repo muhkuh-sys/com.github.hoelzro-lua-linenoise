@@ -39,7 +39,7 @@ except ImportError:
     from urllib2 import urlopen, HTTPError
 
 
-strDefaultJonchkiVersion = '0.0.6.1'
+strDefaultJonchkiVersion = '0.0.11.1'
 
 
 class ProgressOutput:
@@ -193,10 +193,11 @@ class PlatformDetect:
         strOutput = subprocess.check_output(['getconf', 'LONG_BIT']).decode(
             "utf-8",
             "replace"
-        ).strip()
-        if strOutput == '32':
+        )
+        strOutputStrip = strOutput.strip()
+        if strOutputStrip == '32':
             strCpuArchitecture = 'x86'
-        elif strOutput == '64':
+        elif strOutputStrip == '64':
             strCpuArchitecture = 'x86_64'
 
         return strCpuArchitecture

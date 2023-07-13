@@ -34,7 +34,7 @@ strCfg_jonchkiHerePath = os.path.join(
     'jonchki'
 )
 # This is the Jonchki version to use.
-strCfg_jonchkiVersion = '0.0.7.1'
+strCfg_jonchkiVersion = '0.0.11.1'
 # Look in this folder for Jonchki archives before downloading them.
 strCfg_jonchkiLocalArchives = os.path.join(
     strCfg_projectFolder,
@@ -77,12 +77,8 @@ if tPlatform['host_distribution_id'] == 'ubuntu':
     if tPlatform['distribution_id'] == 'ubuntu':
         # Build on linux for linux.
         # It is currently not possible to build for another version of the OS.
-        strOsVersion = tPlatform['distribution_version']
-        strHostOsVersion = tPlatform['host_distribution_version']
-        if strOsVersion != strHostOsVersion:
-            raise Exception(
-                'The target Ubuntu version must match the build host.'
-            )
+        if tPlatform['distribution_version'] != tPlatform['host_distribution_version']:
+            raise Exception('The target Ubuntu version must match the build host.')
 
         if tPlatform['cpu_architecture'] == tPlatform['host_cpu_architecture']:
             # Build for the build host.

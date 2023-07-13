@@ -1,6 +1,7 @@
 import os
 import platform
 import re
+import string
 import subprocess
 
 
@@ -48,10 +49,11 @@ class PlatformDetect:
         strOutput = subprocess.check_output(['getconf', 'LONG_BIT']).decode(
             "utf-8",
             "replace"
-        ).strip()
-        if strOutput == '32':
+        )
+        strOutputStrip = strOutput.strip()
+        if strOutputStrip == '32':
             strCpuArchitecture = 'x86'
-        elif strOutput == '64':
+        elif strOutputStrip == '64':
             strCpuArchitecture = 'x86_64'
 
         return strCpuArchitecture
