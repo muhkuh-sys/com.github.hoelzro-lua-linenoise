@@ -12,8 +12,8 @@ LIST(APPEND SUB_CMAKE_ARGS "-DCMAKE_INSTALL_PREFIX=''")
 
 ExternalProject_Add(TARGET_linenoise
                     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/linenoise
-                    URL ${CMAKE_CURRENT_SOURCE_DIR}/linenoise-9430e6e4e7fc.zip
-                    URL_HASH SHA1=e881da3cdc7be86240729118d6805a1916d184e1
+                    URL ${CMAKE_CURRENT_SOURCE_DIR}/linenoise-4a12be854d95.zip
+                    URL_HASH SHA1=c353bc18f63cbf9aeffe057cfee908b7f76fb52c
                     PATCH_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/copy-over ${CMAKE_CURRENT_BINARY_DIR}/linenoise/src/TARGET_linenoise
                     CMAKE_ARGS ${SUB_CMAKE_ARGS}
                     TEST_COMMAND make test
