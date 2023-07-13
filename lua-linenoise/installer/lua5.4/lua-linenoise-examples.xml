@@ -20,4 +20,16 @@
 		<dependency group="br.puc-rio.inf.www.roberto" module="lpeg" artifact="lua5.4-lpeg" version="1.1"/>
 		<dependency group="com.github.hoelzro" module="lua-linenoise" artifact="lua5.4-lua-linenoise" version="@PROJECT_VERSION@"/>
 	</dependencies>
+	<actions>
+		<action name="finalizer" file="${prj_root}/../../../../examples/finalizer.lua"/>
+		<action name="pack" path="${install_base}">
+			local t = ...
+
+			t:createPackageFile()
+			t:createHashFile()
+			t:createArchive('${prj_root}/../../../repository/${default_archive_name}', 'native')
+
+			return true
+		</action>
+	</actions>
 </jonchki-artifact>
